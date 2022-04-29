@@ -1,15 +1,11 @@
 package com.example.springboot;
 
-import org.jooq.*;
+import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
-
-import static org.jooq.impl.DSL.field;
-import static org.jooq.impl.DSL.table;
 
 @RestController
 public class InventoryController {
@@ -20,7 +16,8 @@ public class InventoryController {
     public InventoryController() throws SQLException {
     }
 
-    //Quantity and id are integers in roman numerals.
+    // Both create items and update item depending on if the item exists
+    // Update could be its own put api
     @PostMapping("/item")
     public String createItem(
             @RequestBody Items responseBody
@@ -28,11 +25,13 @@ public class InventoryController {
         return sqlQuery.insert(responseBody);
     }
 
+    // Gets all items
     @GetMapping("/items")
     public List<Items> viewItems() {
         return sqlQuery.select();
     }
 
+    // Deletes specified item
     @DeleteMapping("/item")
     public String deleteItem(
             @RequestBody Items item
@@ -40,16 +39,20 @@ public class InventoryController {
         return sqlQuery.delete(item);
     }
 
+    // Creates or updates location depending on the existence of said location
+    // update could be its own put api
     @PostMapping("/location")
     public String addLocation(@RequestBody Locations location) {
         return sqlQuery.insert(location);
     }
 
+    // get location details
     @GetMapping("/location")
     public Inventory getLocation(@RequestBody Locations location) {
         return sqlQuery.select(location);
     }
 
+    // delete location and unassign all items of said location
     @DeleteMapping("/location")
     public String deleteLocation(@RequestBody Locations location) {
         return sqlQuery.delete(location);

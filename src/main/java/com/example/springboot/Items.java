@@ -1,9 +1,5 @@
 package com.example.springboot;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Items {
     private int id;
     private String name;
@@ -18,14 +14,6 @@ public class Items {
         this.itemtype = itemtype;
         this.quantity = quantity;
         this.description = description;
-    }
-
-    public void editItem(String name, String itemType, int quantity, String desc, String locationName) {
-        this.name = name;
-        this.itemtype = itemType;
-        this.quantity = quantity;
-        this.description = desc;
-        this.location = locationName;
     }
 
     public int getId() {

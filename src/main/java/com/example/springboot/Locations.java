@@ -1,8 +1,5 @@
 package com.example.springboot;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Locations {
     String name;
     // Address should be in form (number street name, city/state, country
